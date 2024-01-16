@@ -14,15 +14,7 @@ public class CarController {
     }
     @GetMapping(value = "/cars")
     public String showCars(@RequestParam(value = "count", defaultValue = "5" ) int count, ModelMap model) {
-        try {
-            if (count < 5) {
-                model.addAttribute("cars", carService.getListCars(count));
-            } else {
-                model.addAttribute("cars", carService.getListCars(carService.getCarCount()));
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        carService.whichpagetoshow(count, model);
         return "cars";
     }
 }

@@ -1,7 +1,9 @@
 package web.service;
 
 import org.springframework.stereotype.Service;
+import org.springframework.ui.ModelMap;
 import web.model.Car;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,4 +31,16 @@ public class CarServiceImp implements CarService {
         return cars.size();
     }
 
+    @Override
+    public void whichpagetoshow(int count, ModelMap model) {
+        try {
+            if (count <= 5) {
+                model.addAttribute("cars", getListCars(count));
+            } else {
+                model.addAttribute("cars", getListCars(getCarCount()));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
