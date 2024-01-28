@@ -26,21 +26,13 @@ public class CarServiceImp implements CarService {
         return cars.stream().limit(count).toList();
     }
 
-    @Override
-    public int getCarCount() {
-        return cars.size();
-    }
 
     @Override
     public void whichpagetoshow(int count, ModelMap model) {
-        try {
-            if (count <= 5) {
+            if (count < 5) {
                 model.addAttribute("cars", getListCars(count));
             } else {
-                model.addAttribute("cars", getListCars(getCarCount()));
+                model.addAttribute("cars", getListCars(cars.size()));
             }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 }
